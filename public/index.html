@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Whiteboard</title>
+      <!--- JS References -!-->
+      <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+      <!--- for dragabbles -!-->
+      <script type="text/javascript" src="./js/socketio2.0.4.min.js"></script>
+      <script type="text/javascript" src="./js/jqColorPicker.min.js"></script>
+      <script type="text/javascript" src="./js/whiteboard.js"></script>
+      <script type="text/javascript" src="./js/main.js"></script>
+	    <script type="text/javascript" src="./js/bootstrap.js"></script>
+      <!--- CSS References -!-->
+      <link rel="stylesheet" href="./css/jquery-ui.min.css">
+      <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+      <link href="./css/main.css" rel="stylesheet">
+      <link href="./css/bootstrap.css" rel="stylesheet">
+	  <script src = "./socket.io/socket.io.js"></script>
+
+        <link href="./css/fb.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="./js/script.js"></script>
+
+   </head>
+   <body style="position: relative; margin: 0px; height: 100vh; width: 100%; overflow: hidden;">
+      <!-- Navigation -->
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">RTCViews.com</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="index.html">Home</a>
+        <a class="p-2 text-dark" href="about.html">About</a>
+        <a class="p-2 text-dark" href="support.html">Support</a>
+        <a class="p-2 text-dark" href="demo.html">Live Demo</a>
+      </nav>
+	    <a class="btn btn-outline-primary" data-toggle="modal" data-target="#basicExampleModal">Demo</a>
+    </div>
+	
+	  <!-- Modal -->
+	<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Login</h5>
+			</button>
+		</div>
+		<div class="modal-body">
+			<!-- Modal Body -->
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                        Roomname
+                        <input type="email" class="form-control" 
+                        id="roomname" placeholder="excepting your roomname"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-10">
+                        Username
+                        <input type="text" class="form-control"
+                            id="username" placeholder="excepting your username"/>
+                    </div>
+                  </div>
+                </form>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" onclick="submitContactForm()">Start Demo</button>
+		</div>
+		</div>
+	</div>
+	</div>
+	
+  <div class="chat_box">
+	<div class="chat_head"> Chat Box</div>
+	<div class="chat_body"> 
+	<div class="user"> Krishna Teja</div>
+  <div class="user"> Santosh Shingare</div>
+	</div>
+  </div>
+
+<div class="msg_box" style="right:290px">
+	<div class="msg_head">Krishna Teja
+	<div class="close">x</div>
+	</div>
+	<div class="msg_wrap">
+		<div class="msg_body">
+			<div class="msg_a">This is from A	</div>
+			<div class="msg_b">This is from B, and its amazingly kool nah... i know it even i liked it :)</div>
+			<div class="msg_a">Wow, Thats great to hear from you man </div>	
+			<div class="msg_push"></div>
+		</div>
+	<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
+</div>
+</div>
+
+  
+<!-- Footer -->
+<footer class="footer">
+      <div class="container">
+        <span class="text-muted" align="right">Copyright © 2018 RTCViews  |  All Rights Reserved</span>
+      </div>
+    </footer>
+</body>
+</html>

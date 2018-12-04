@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Whiteboard</title>
+      <!--- JS References -!-->
+      <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+      <!--- for dragabbles -!-->
+      <script type="text/javascript" src="./js/socketio2.0.4.min.js"></script>
+      <script type="text/javascript" src="./js/jqColorPicker.min.js"></script>
+      <script type="text/javascript" src="./js/whiteboard.js"></script>
+      <script type="text/javascript" src="./js/main.js"></script>
+	    <script type="text/javascript" src="./js/bootstrap.js"></script>
+      <!--- CSS References -!-->
+      <link rel="stylesheet" href="./css/jquery-ui.min.css">
+      <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+      <link href="./css/main.css" rel="stylesheet">
+      <link href="./css/bootstrap.css" rel="stylesheet">
+	  <script src = "./socket.io/socket.io.js"></script>
+      <link href="./css/fb.css" rel="stylesheet">
+   </head>
+   <body style="position: relative; margin: 0px; height: 100vh; width: 100%; overflow: hidden;">
+	<script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('updateUser', function(message) {
+        console.log('fetchUser '+ message.users);
+    });
+	socket.on('fetchUser', function(message) {
+		var el = document.getElementById('listuser');
+			while ( el.firstChild ) el.removeChild( el.firstChild );
+			createUserList(message);
+    });
+
+	$('#btn').click(function() {
+        $('#modelWindow').modal('show');
+    });
+
+</script>
+      <!-- Navigation -->
+<!-- Navigation -->
+    
+	<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">RTCViews.com</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+		<a class="p-2 text-dark" href="index.html">Home</a>
+        <a class="p-2 text-dark" href="about.html">About</a>
+        <a class="p-2 text-dark" href="support.html">Support</a>
+      </nav>
+      <!--<a class="btn btn-outline-primary" data-toggle="modal" data-target="#basicExampleModal">Demo</a>-->
+    </div>
+	
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-md-10" id="board_block">
+               <div id="whiteboardContainer"></div>
+               <div class="btn-group-vertical" >
+			   <div style="position: absolute; top: 50px; left: 0px;">
+                  <button id="whiteboardTrashBtn" title="Clears the whiteboard" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="fa fa-trash"></i>
+               </button>
+               <button id="whiteboardUndoBtn" title="Undo your last step" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="fa fa-undo"></i>
+               </button>
+               <button tool="mouse" title="Take the mouse" type="button" class="whiteboardTool btn btn-primary">
+               <i class="fa fa-mouse-pointer"></i>
+               </button>
+               <button style="padding-bottom: 11px;" tool="recSelect" title="Select an area" type="button" class="whiteboardTool btn btn-primary">
+               <img src="./img/dottedRec.png">
+               </button>
+               <button tool="pen" title="Take the pen" type="button" class="whiteboardTool active btn btn-primary">
+               <i class="fa fa-pencil-alt"></i>
+               </button>
+               <button style="padding-bottom: 8px; padding-top: 7px;" tool="line" title="draw a line" type="button" class="whiteboardTool btn btn-primary">
+				╱
+			   </button>
+               <button tool="rect" title="draw a rectangle" type="button" class="whiteboardTool btn btn-primary">
+               <i class="far fa-square"></i>
+               </button>
+               <button tool="circle" title="draw a circle" type="button" class="whiteboardTool btn btn-primary">
+               <i class="far fa-circle"></i>
+               </button>
+               <button tool="eraser" title="take the eraser" type="button" class="whiteboardTool btn btn-primary ">
+               <i class="fa fa-eraser" aria-hidden="true"></i>
+               </button>
+               <button id="saveAsImageBtn" title="Save whiteboard as image" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="fas fa-image"></i>
+               <i style="position: absolute; top: 3px; left: 2px; color: #000000; background: grey; font-size: 0.5em; " class="fas fa-save"></i>
+               </button>
+               <button style="position: relative;" id="saveAsJSONBtn" title="Save whiteboard as JSON" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="far fa-file-alt"></i>
+               <i style="position: absolute; top: 3px; left: 2px; color: #000000; background: grey; font-size: 0.5em; " class="fas fa-save"></i>
+               </button>
+               <button id="addImgToCanvasBtn" title="Upload Image to whiteboard" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="fas fa-image"></i>
+               <i style="position: absolute; top: 3px; left: 2px; color: #000000; font-size: 0.5em; " class="fas fa-upload"></i>
+               </button>
+               <button style="position: relative;" id="uploadJsonBtn" title="Load saved JSON to whiteboard" type="button" class="whiteboardBtn btn btn-primary">
+               <i class="far fa-file-alt"></i>
+               <i style="position: absolute; top: 3px; left: 2px; color: #000000; font-size: 0.5em; " class="fas fa-upload"></i>
+               </button>
+               <input style="display:none;" id="myFile" type="file" />
+               </div>
+			   </div>
+            </div>
+            <div class="col-md-2 nopadding" style="overflow-y: scroll;min-height: 100%">
+               <div class="features-slider"  style="position: absolute; top: 50px; left: 0px;">
+                   <div class="chat_box">
+	                <div class="chat_head"> Chat Box</div>
+				    <table class="table-users table" border="0" width=100% style="overflow-y: scroll;min-height: 100%">
+					<tbody class="chat_body" id="listuser" width=100%>
+
+					</tbody>
+				    </table>
+                   </div>
+               </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+<!-- Footer -->
+<footer class="footer">
+      <div class="container">
+        <span class="text-muted" align="right">Copyright © 2018 RTCViews  |  All Rights Reserved</span>
+      </div>
+    </footer>
+</body>
+</html>
