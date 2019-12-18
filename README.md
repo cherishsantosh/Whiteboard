@@ -1,7 +1,8 @@
 # whiteboard
 This is a lightweight NodeJS collaborative Whiteboard/Sketchboard witch can easily be customized...
 
-![start](https://github.com/cherishsantosh/Whiteboard/blob/master/public/img/Screen%20Shot%202018-09-29%20at%209.04.23%20PM.png)
+Demo:
+https://github.com/cherishsantosh/whiteboard/blob/master/public/img/whiteboard.png
 
 ## Some Features
 * Showing remote user cursors while drawing
